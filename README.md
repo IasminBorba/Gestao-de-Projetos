@@ -16,6 +16,7 @@
 - Django
 - Django Rest Framework
 - PostgreSql
+<br>
 
 ## 🛠 Como rodar o projeto?
 
@@ -48,6 +49,7 @@ Por fim, basta rodar o servidor local com o comando:
 ```sh
 python manage.py runserver
 ```
+<br>
 
 ## 📂 Estrutura do Repositório
 - `src/` → Código-fonte do sistema
@@ -55,7 +57,7 @@ python manage.py runserver
 - `docs/` → Documentação extra
 - `README.md` → Explicação do projeto
 - `.gitignore` → Arquivos ignorados no Git
-
+<br>
 
 ## 📑 **Documentação da API**
 
@@ -65,6 +67,14 @@ A API permite gerenciar projetos, colaboradores, áreas tecnológicas e financia
 | Método | Endpoint   | Descrição |
 |--------|------------|-----------|
 | `GET`  | `/admin/`  | Acesso ao painel administrativo do Django. |
+
+### 👥 **Endpoints de Colaboradores**  
+| Método  | Endpoint                                   | Descrição |
+|---------|--------------------------------------------|-----------|
+| `GET`   | `/colaboradores/listar/`                   | Lista todos os colaboradores cadastrados. |
+| `POST`  | `/colaboradores/cadastrar/`                | Cadastra um novo colaborador. |
+| `GET`   | `/colaboradores/{id_colaborador}/visualizar/`         | Retorna detalhes de um colaborador específico. |
+| `PATCH` | `/colaboradores/{id_colaborador}/editar/`             | Edita as informações de um colaborador. |
 
 ### 🚀 **Endpoints de Projetos**  
 | Método  | Endpoint                                    | Descrição |
@@ -78,20 +88,12 @@ A API permite gerenciar projetos, colaboradores, áreas tecnológicas e financia
 | `GET`   | `/projetos/{id_projeto}/equipe/`            | Lista a equipe de um projeto. |
 | `PATCH` | `/projetos/{id_projeto}/equipe/atualizar/`  | Atualiza a equipe de um projeto. |
 
-### 👥 **Endpoints de Colaboradores**  
-| Método  | Endpoint                                   | Descrição |
-|---------|--------------------------------------------|-----------|
-| `GET`   | `/colaboradores/listar/`                   | Lista todos os colaboradores cadastrados. |
-| `POST`  | `/colaboradores/cadastrar/`                | Cadastra um novo colaborador. |
-| `GET`   | `/colaboradores/{id_colaborador}/visualizar/`         | Retorna detalhes de um colaborador específico. |
-| `PATCH` | `/colaboradores/{id_colaborador}/editar/`             | Edita as informações de um colaborador. |
-
 ### 📚 **Endpoints de Áreas Tecnológicas**  
 | Método  | Endpoint                                   | Descrição |
 |---------|--------------------------------------------|-----------|
-| `GET`   | `/areas_tecnologicas/listar/`              | Lista todas as áreas tecnológicas cadastradas. |
+| `GET`   | `/projetos/areas_tecnologicas/listar/`              | Lista todas as áreas tecnológicas cadastradas. |
 
 ### 💰 **Endpoints de Financiadores**  
 | Método  | Endpoint                                   | Descrição |
 |---------|--------------------------------------------|-----------|
-| `GET`   | `/financiadores/listar/`                   | Lista todos os financiadores cadastrados. |
+| `GET`   | `/projetos/financiadores/listar/`                   | Lista todos os financiadores cadastrados. |
