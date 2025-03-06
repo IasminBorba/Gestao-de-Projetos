@@ -34,10 +34,15 @@ class ProjetosView(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'])
     def form(self, request):
-        dados = []
-        dados['financiadores'] = FinanciadoresSerializer(Financiadores.objects.all().order_by('financiador'), many=True).data
-        dados['areas_tecnologicas'] = AreasTecnologicasSerializer(AreasTecnologicas.objects.all().order_by('area_tecnologica'), many=True).data
-        dados['equipe'] = ColaboradoresSerializer(Colaboradores.objects.all().order_by('nome'), many=True).data
+        financiadores = Financiadores.objects.all().order_by('financiador')
+        areas_tecnologicas = AreasTecnologicas.objects.all().order_by('area_tecnologica')
+        colaboradores = Colaboradores.objects.all().order_by('nome')
+
+        dados = {
+            'financiadores': FinanciadoresSerializer(financiadores, many=True).data,
+            'areas_tecnologicas': AreasTecnologicasSerializer(areas_tecnologicas, many=True).data,
+            'colaboradores': ColaboradoresSerializer(colaboradores, many=True).data
+        }
 
         return Response(dados)
 
@@ -73,10 +78,13 @@ class ProjetosView(viewsets.ModelViewSet):
             projeto = Projetos.objects.get(id_projeto=id_projeto)
         except:
             return Response({'message': 'Projeto não encontrado'})
+        
+        projeto.equipe.clear()
 
         serializer = self.serializer_class(projeto, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
+            projeto.save()
             return Response({'message': 'Projeto atualizado com sucesso'})
         else:
             return Response(serializer.errors)
@@ -85,7 +93,7 @@ class ProjetosView(viewsets.ModelViewSet):
     def visualizar(self, request, id_projeto=None):
         try:
             projeto = Projetos.objects.get(id_projeto=id_projeto)
-            return Response(projeto.data)
+            return Response(ProjetosSerializer(projeto).data)
         except:
             return Response({'message': 'Projeto não encontrado'})
 
@@ -104,15 +112,13 @@ class ProjetosView(viewsets.ModelViewSet):
             projeto = Projetos.objects.get(id_projeto=id_projeto)
         except:
             return Response({'message': 'Projeto não encontrado'})
+        
+        projeto.equipe.clear()
 
         for colaborador_data in request.data['equipe']:
             try:
                 colaborador = Colaboradores.objects.get(id_colaborador=colaborador_data['id_colaborador'])
-                serializer = ColaboradoresSerializer(colaborador, data=colaborador_data, partial=True)
-                if serializer.is_valid():
-                    serializer.save()
-                else:
-                    return Response(serializer.errors)
+                projeto.equipe.add(colaborador)
             except Colaboradores.DoesNotExist:
                 return Response({'message': 'Colaborador não encontrado'})
 

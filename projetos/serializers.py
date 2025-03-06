@@ -33,7 +33,7 @@ class ProjetosSerializer(serializers.ModelSerializer):
         }
 
         res = {
-            'id_projeto': obj.id_equipe_projeto,
+            'id_projeto': obj.id_projeto,
             'projeto': obj.projeto,
             'financiador': financiador,
             'area_tecnologica': area_tecnologica,

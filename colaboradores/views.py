@@ -31,7 +31,7 @@ class ColaboradoresView(viewsets.ModelViewSet):
     def visualizar(self, request, id_colaborador=None):
         try:
             colaborador = Colaboradores.objects.get(id_colaborador=id_colaborador)
-            return Response(colaborador.data)
+            return Response(ColaboradoresSerializer(colaborador).data)
         except:
             return Response({'message': 'Colaborador não encontrado'})
 

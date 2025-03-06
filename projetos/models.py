@@ -7,7 +7,7 @@ class AreasTecnologicas(models.Model):
     area_tecnologica = models.CharField(max_length=100)
 
     class Meta:
-        db_table = 'projetos"."AreasTecnologicas'
+        db_table = 'AreasTecnologicas'
         verbose_name_plural = 'Áreas Tecnológicas'
 
     def __str__(self):
@@ -19,7 +19,7 @@ class Financiadores(models.Model):
     financiador = models.CharField(max_length=100)
 
     class Meta:
-        db_table = 'projetos"."Financiadores'
+        db_table = 'Financiadores'
         verbose_name_plural = 'Financiadores'
 
     def __str__(self):
@@ -37,15 +37,11 @@ class Projetos(models.Model):
     fim_vigencia = models.DateField()
     valor = models.FloatField()
     qtd_membros = models.IntegerField(default=0)
-    equipe = models.ManyToManyField(Colaboradores, blank=True, symmetrical=False, related_name='equipe', db_table='projeto"."EquipeProjeto',)
+    equipe = models.ManyToManyField(Colaboradores, blank=True, symmetrical=False, related_name='equipe', db_table='EquipeProjeto',)
 
     class Meta:
-        db_table = 'projetos"."Projetos'
+        db_table = 'Projetos'
         verbose_name_plural = 'Projetos'
 
     def __str__(self):
         return self.projeto
-
-    def atualizar_qtd_membros(self):
-        self.qtd_membros = self.equipe.count()
-        self.save()

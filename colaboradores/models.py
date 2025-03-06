@@ -14,7 +14,7 @@ class Colaboradores(models.Model):
     dt_nascimento = models.DateField()
 
     class Meta:
-        db_table = 'colaboradores"."Colaboradores'
+        db_table = 'Colaboradores'
         verbose_name_plural = 'Colaboradores'
 
     def __str__(self):
