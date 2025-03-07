@@ -52,12 +52,15 @@ python manage.py runserver
 <br>
 
 ## 📂 Estrutura do Repositório
-- `src/` → Código-fonte do sistema
-- `test/` → Testes unitários
-- `docs/` → Documentação extra
-- `README.md` → Explicação do projeto
+- `colaboradores/` → Aplicação Django para gerenciamento de colaboradores
+- `projetos/` → Aplicação Django para gerenciamento de projetos
+- `gestao_projetos/` → Configuração principal do projeto Django
+- `env/` → Ambiente virtual (se aplicável)
+- `db.sqlite3` → Banco de dados SQLite
+- `manage.py` → Script de gerenciamento do Django
 - `.gitignore` → Arquivos ignorados no Git
-<br>
+- `README.md` → Explicação do projeto
+- `requirements.txt` → Dependências do projeto
 
 ## 📑 **Documentação da API**
 
